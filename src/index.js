@@ -39,7 +39,7 @@ class Form extends React.Component {
       return (
         <form onSubmit={this.submitHandler}>
             <h1>Hi {this.state.username}</h1>
-                <p>Enter your name:</p>
+                <p>Enter your username:</p>
                     <input
                         type='text'
                         name='username'

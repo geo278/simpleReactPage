@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 class Form extends React.Component {
@@ -23,7 +22,7 @@ class Form extends React.Component {
       let username = this.state.username;
       let validcharacters = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
       for (let i = 0, l = username.length; i < l; i++) {
-          if (validcharacters.indexOf(username.substr(i, 1)) == -1) {
+          if (validcharacters.indexOf(username.substr(i, 1)) === -1) {
               alert("Username must contain only numbers and letters with no spaces");
               break;
           }

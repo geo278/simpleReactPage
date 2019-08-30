@@ -36,9 +36,17 @@ input[type=text] {
 
 .btn:hover {opacity: 1}
 
-.valid {
+.showValid {
   color: green;
+  opacity: 1;
 }
-.invalid {
+.showInvalid {
   color: red;
+  opacity: 1;
+}
+
+.hide {
+  transition: 300ms all ease;
+  opacity: 0;
+  will-change: opacity;
 }

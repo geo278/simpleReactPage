@@ -10,7 +10,9 @@ class Form extends React.Component {
         username: '',
         valid: true,
         message: '',
+        msgType: 'hide',
       };
+      this.showNotification = this.showNotification.bind(this);
     }
     
     changeHandler = (event) => {
@@ -23,7 +25,7 @@ class Form extends React.Component {
       let isValid = true;
       let username = this.state.username;
       let l = username.length;
-      if (l == 0) {
+      if (l === 0) {
         msg = <strong> Please enter a username </strong>;
         isValid = false;
       } else if (l > 16) {
@@ -41,16 +43,37 @@ class Form extends React.Component {
       }
       if (isValid) {
         msg = <strong>Username is valid </strong>;
+        this.setState({msgType: 'showValid'});
+      } else {
+        this.setState({msgType: 'showInvalid'});
       }
-      this.setState({valid: isValid});
-      this.setState({message: msg});
+
+      this.setState({
+        valid: isValid,
+        message: msg,
+      });
+
+    }
+
+
+    showNotification() {
+      if (this.state.valid) {
+        this.setState({
+          msgType: 'showValid',
+        });
+      } else {
+        this.setState({
+          msgType: 'showInvalid',
+        });
+      }
+      setTimeout(() => {
+        this.setState({
+          msgType: 'hide',
+        });
+      }, 1000);
     }
 
     render() {
-      let messageType = "valid";
-      if (!this.state.valid) {
-        messageType = "invalid";
-      }
       return (
         <form onSubmit={this.submitHandler}>
             <h1> Welcome </h1>
@@ -61,14 +84,15 @@ class Form extends React.Component {
                         onChange={this.changeHandler}
                     />
             <br/> 
-            <span class={messageType}> {this.state.message} </span>
+            <div className={this.state.msgType}> {this.state.message} </div>            
             <br/> <br/>
-            <button class="btn"> Validate </button>
+            <button onClick={this.showNotification} className="btn"> Validate </button>
+            
         </form>
       );
     }
   }
-  
+
   ReactDOM.render(<Form />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

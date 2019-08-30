@@ -1,4 +1,4 @@
-To run the app, cd into the repo and use 
+To run it, cd into the repo and use 
 ### `npm install`
 followed by
 ### `npm start`

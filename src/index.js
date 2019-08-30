@@ -24,18 +24,18 @@ class Form extends React.Component {
       let username = this.state.username;
       let l = username.length;
       if (l == 0) {
-        msg = <strong>Please enter a username</strong>;
+        msg = <strong> Please enter a username </strong>;
         isValid = false;
       } else if (l > 16) {
-        msg = <strong>Username too long</strong>;
+        msg = <strong> Username too long </strong>;
         isValid = false;
       } else {
         let validcharacters = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         for (let i = 0; i < l; i++) {
           if (validcharacters.indexOf(username.substr(i, 1)) === -1) {
-            msg = <strong>Username must contain only numbers and letters</strong>;
-              isValid = false;
-              break;
+            msg = <strong> Username must contain only numbers and letters </strong>;
+            isValid = false;
+            break;
           }
         }
       }
@@ -53,8 +53,8 @@ class Form extends React.Component {
       }
       return (
         <form onSubmit={this.submitHandler}>
-            <h1>Welcome </h1>
-                <p>Please enter your username:</p>
+            <h1> Welcome </h1>
+                <p> Please enter your username: </p>
                     <input
                         type='text'
                         name='username'

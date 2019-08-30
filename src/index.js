@@ -8,7 +8,7 @@ class Form extends React.Component {
       super(props);
       this.state = {
         username: '',
-        age: null,
+        errormessage: '',
       };
     }
     
@@ -18,42 +18,38 @@ class Form extends React.Component {
 
     submitHandler = (event) => {
       event.preventDefault();
-
+      let err = '';
       let username = this.state.username;
+      let l = username.length;
+      if (l > 16) {
+        err = <strong>Username too long</strong>;
+      }
       let validcharacters = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-      for (let i = 0, l = username.length; i < l; i++) {
+      for (let i = 0; i < l; i++) {
           if (validcharacters.indexOf(username.substr(i, 1)) === -1) {
-              alert("Username must contain only numbers and letters with no spaces");
+              err = <strong>Username invalid</strong>;
+              //alert("Username must contain only numbers and letters with no spaces");
               break;
           }
       }
-
-      // let age = this.state.age;
-      // if (!Number(age) && age != null) {
-      //   alert("Your age must be a number");
-      // }
+      this.setState({errormessage: err});
     }
 
     render() {
+      const {fading} = this.state;
       return (
         <form onSubmit={this.submitHandler}>
-            <h1>Welcome {this.state.username}</h1>
+            <h1>Welcome </h1>
                 <p>Please enter your username:</p>
                     <input
                         type='text'
                         name='username'
                         onChange={this.changeHandler}
                     />
-
-                {/* <p>Enter your age:</p>
-            <input
-                type='text'
-                name='age'
-                onChange={this.changeHandler}
-            /> */}
-            
+            <br/> 
+            <span class="note"> {this.state.errormessage} </span>
             <br/> <br/>
-            <input type='submit' />
+            <button class="btn"> Validate </button>
         </form>
       );
     }

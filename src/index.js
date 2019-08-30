@@ -13,11 +13,11 @@ class Form extends React.Component {
     }
     
     changeHandler = (event) => {
-      this.setState({[event.target.name]: event.target.value}); // rerenders components on changes
+      this.setState({[event.target.name]: event.target.value}); // updates components on changes
     }
 
     submitHandler = (event) => {
-      //event.preventDefault();
+      event.preventDefault();
 
       let username = this.state.username;
       let validcharacters = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -28,29 +28,31 @@ class Form extends React.Component {
           }
       }
 
-      let age = this.state.age;
-      if (!Number(age) && age != null) {
-        alert("Your age must be a number");
-      }
+      // let age = this.state.age;
+      // if (!Number(age) && age != null) {
+      //   alert("Your age must be a number");
+      // }
     }
 
     render() {
       return (
         <form onSubmit={this.submitHandler}>
-            <h1>Hi {this.state.username}</h1>
-                <p>Enter your username:</p>
+            <h1>Welcome {this.state.username}</h1>
+                <p>Please enter your username:</p>
                     <input
                         type='text'
                         name='username'
                         onChange={this.changeHandler}
                     />
-                <p>Enter your age:</p>
+
+                {/* <p>Enter your age:</p>
             <input
                 type='text'
                 name='age'
                 onChange={this.changeHandler}
-            />
-            <br/>
+            /> */}
+            
+            <br/> <br/>
             <input type='submit' />
         </form>
       );

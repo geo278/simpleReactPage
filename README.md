@@ -1,3 +1,9 @@
+To run the app, cd into the repo and use 
+### `npm install`
+followed by
+### `npm start`
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

@@ -36,7 +36,9 @@ input[type=text] {
 
 .btn:hover {opacity: 1}
 
-.note {
-  transition: 0.35s;
+.valid {
+  color: green;
+}
+.invalid {
   color: red;
 }

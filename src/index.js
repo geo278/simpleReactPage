@@ -8,7 +8,8 @@ class Form extends React.Component {
       super(props);
       this.state = {
         username: '',
-        errormessage: '',
+        valid: true,
+        message: '',
       };
     }
     
@@ -18,25 +19,38 @@ class Form extends React.Component {
 
     submitHandler = (event) => {
       event.preventDefault();
-      let err = '';
+      let msg = '';
+      let isValid = true;
       let username = this.state.username;
       let l = username.length;
-      if (l > 16) {
-        err = <strong>Username too long</strong>;
-      }
-      let validcharacters = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-      for (let i = 0; i < l; i++) {
+      if (l == 0) {
+        msg = <strong>Please enter a username</strong>;
+        isValid = false;
+      } else if (l > 16) {
+        msg = <strong>Username too long</strong>;
+        isValid = false;
+      } else {
+        let validcharacters = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        for (let i = 0; i < l; i++) {
           if (validcharacters.indexOf(username.substr(i, 1)) === -1) {
-              err = <strong>Username invalid</strong>;
-              //alert("Username must contain only numbers and letters with no spaces");
+            msg = <strong>Username must contain only numbers and letters</strong>;
+              isValid = false;
               break;
           }
+        }
       }
-      this.setState({errormessage: err});
+      if (isValid) {
+        msg = <strong>Username is valid </strong>;
+      }
+      this.setState({valid: isValid});
+      this.setState({message: msg});
     }
 
     render() {
-      const {fading} = this.state;
+      let messageType = "valid";
+      if (!this.state.valid) {
+        messageType = "invalid";
+      }
       return (
         <form onSubmit={this.submitHandler}>
             <h1>Welcome </h1>
@@ -47,7 +61,7 @@ class Form extends React.Component {
                         onChange={this.changeHandler}
                     />
             <br/> 
-            <span class="note"> {this.state.errormessage} </span>
+            <span class={messageType}> {this.state.message} </span>
             <br/> <br/>
             <button class="btn"> Validate </button>
         </form>

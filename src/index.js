@@ -4,15 +4,15 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 
 class Form extends React.Component {
+  state = {
+    username: '',
+    valid: true,
+    message: '',
+    msgType: 'hide',
+  };
+
     constructor(props) {
       super(props);
-      this.state = {
-        username: '',
-        valid: true,
-        message: '',
-        msgType: 'hide',
-      };
-      this.showNotification = this.showNotification.bind(this);
     }
     
     changeHandler = (event) => {
@@ -41,22 +41,25 @@ class Form extends React.Component {
           }
         }
       }
-      if (isValid) {
-        msg = <strong>Username is valid </strong>;
-        this.setState({msgType: 'showValid'});
-      } else {
-        this.setState({msgType: 'showInvalid'});
+
+      const state = {
+        valid: isValid,
+        message: msg
       }
 
-      this.setState({
-        valid: isValid,
-        message: msg,
-      });
+      if (isValid) {
+        state.msg = <strong>Username is valid </strong>;
+        state.msgType = 'showValid';
+      } else {
+        state.msgType = 'showInvalid';
+      }
+
+      this.setState(state);
 
     }
 
 
-    showNotification() {
+    showNotification = () => {
       if (this.state.valid) {
         this.setState({
           msgType: 'showValid',
